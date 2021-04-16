@@ -6,12 +6,16 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start-client": "npm run start --prefix client",
-    "start-server": "node index.js"
+    "start-server": "nodemon index"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "socket.io": "^4.0.1"
+    "socket.io": "^4.0.1",
+    "socket.io-client": "^4.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
   }
 }
