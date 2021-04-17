@@ -1,9 +1,27 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './index.css';
 
-const MessageInputter = () => {
+const MessageInputter = ({submitMessage}) => {
+    const [value, setValue] = useState('');
+    const changeHandler = (event) => {
+        setValue(event.target.value);
+    }
+    const submitHandler = (event) => {
+        event.preventDefault();
+        if (value.trim())
+            submitMessage(value);
+        setValue('');
+    }
     return (
-        <h2>Message Inputter</h2>
+        <div className = 'message-inputter'>
+            <form>
+                <input type = 'text' 
+                    placeholder = 'Start chatting!' 
+                    value = {value}
+                    onChange = {changeHandler}/>
+                <button type = 'submit' onClick = {submitHandler}>Send message</button>
+            </form>
+        </div>
     );
 }
 

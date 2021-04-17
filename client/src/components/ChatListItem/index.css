@@ -1,0 +1,50 @@
+.chat-list-item{
+    display: flex;
+    padding: 5px;
+    height: 76px;
+    cursor: pointer;
+}
+
+.chat-list-item.selected{
+    background-color: #f7f7f7;
+}
+
+.chat-list-item .avatar{
+    width: 76px;
+    height: 76px;
+    position: relative;
+}
+
+.chat-list-item .avatar img{
+    height: 100%;
+}
+
+.avatar .status{
+    position: absolute;
+    bottom: -4px;
+    right: -4px;
+    width: 15px;
+    height: 15px;
+    border-radius: 100%;
+    background-color: yellow;
+}
+
+.avatar .status.online{
+    background-color: #1fd63d;
+}
+
+.chat-list-item .content{
+    height: 100%;
+    font-size: 12px;
+    margin-left: 10px;
+    overflow: hidden;
+}
+
+.chat-list-item .content .name{
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.chat-list-item .content .description{
+    color: rgb(138, 138, 138);
+}

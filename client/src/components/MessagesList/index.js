@@ -1,9 +1,13 @@
 import React from 'react';
+import Message from '../Message';
 import './index.css';
 
-const MessagesList = () => {
+const MessagesList = ({messages}) => {
+    const Messages = messages.map(message => <Message userName = {message.name} message = {message.message} time = {message.time}/>)
     return (
-        <h2>Message List</h2>
+        <div className = 'messages-list'>
+            {Messages}
+        </div>
     );
 }
 

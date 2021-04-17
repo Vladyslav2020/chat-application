@@ -1,0 +1,42 @@
+.message-inputter{
+    position: absolute;
+    bottom: 10px;
+    margin: 10px;
+    width: calc(100% - 20px);
+}
+
+.message-inputter form{
+    display: flex;
+    justify-content: space-around;
+}
+
+.message-inputter input{
+    padding: 10px 14px;
+    font-size: 16px;
+    border-radius: 4px;
+    width: calc(80% - 30px);
+    margin-right: 10px;
+    box-sizing: border-box;
+    outline: none;
+    border: 1px solid white;
+}
+
+.message-inputter input:focus{
+    border-color: rgb(77, 77, 255);
+}
+
+.message-inputter button{
+    color: white;
+    padding: 10px 0 10px 0;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    width: 20%;
+    box-sizing: border-box;
+    border-radius: 4px;
+    background-color: #428aca;
+}
+
+::placeholder{
+    font-size: 14px;
+}

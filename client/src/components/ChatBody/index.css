@@ -1,0 +1,28 @@
+.chat-body{
+    display: flex;
+    width: 90%;
+    background-color: #d6dee7;
+    justify-content: space-between;
+    border-radius: 8px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    position: relative;
+    min-height: 500px;
+}
+
+.chat-body .left-side{
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.chat-body .right-side{
+    display: flex;
+    width: 70%;
+    background-color: white;
+    border-top-right-radius: inherit;
+    border-bottom-right-radius: inherit;
+    box-sizing: border-box;
+    position: relative;
+}

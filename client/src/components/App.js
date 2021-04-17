@@ -3,12 +3,12 @@ import ChatBody from './ChatBody';
 import ChatHeader from './ChatHeader';
 
 
-const App = ({store}) => {
+const App = ({store, handlers}) => {
     console.log("App prop store", store);
     return (
         <>
             <ChatHeader/>
-            <ChatBody name = {store.name} description = {store.description}/>
+            <ChatBody store = {store} handlers = {handlers}/>
         </>
     );
 }
