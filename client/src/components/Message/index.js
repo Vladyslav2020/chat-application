@@ -4,7 +4,6 @@ import './index.css';
 const Message = ({name, message, time, isMyMessage, needToScroll}) => {
     const myRef = useRef(0);
     useEffect(() => {
-        console.log("scrolled", needToScroll);
         if (needToScroll)
             myRef.current.scrollIntoView();
     }, [myRef]);
