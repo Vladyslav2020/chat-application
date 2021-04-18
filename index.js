@@ -34,6 +34,7 @@ let bots = [
             for (let i = 0; i < message.length; i++){
                 newMessage += message[message.length - i - 1];
             }
+            console.log(newMessage);
             setTimeout(() => {
                 socket.emit('new-message', {
                     name: this.name, 
@@ -99,6 +100,7 @@ io.on("connection", (socket) => {
             clients.set(id, {socket, name, id, description: clientDescription, status: 'online', avatar: avatarUrl});
             socket.emit('set-data', {name, id, description: clientDescription, status: 'online', avatar: avatarUrl}, reset=true);
             bots.forEach(bot => {
+                console.log("Additing new chat for client");
                 socket.emit('add-chat', {
                     name: bot.name,
                     description: bot.description,
@@ -122,6 +124,7 @@ io.on("connection", (socket) => {
         const currentClient = clients.get(currentID);
         Array.from(clients.values()).forEach(client => {
             if (client.id !== currentClient.id){
+                console.log("Additing new chat for client");
                 client.socket.emit('add-chat', {
                     name: currentClient.name, 
                     description: currentClient.description,
@@ -139,11 +142,15 @@ io.on("connection", (socket) => {
             }
         });
         if (name.includes('bot')){
-            bots.forEach(bot => {
-                if (bot.name === name){
-                    bot.onMessage(clients.get(id).socket, message);
-                }
-            })
+            const sender = clients.get(id);
+            console.log('Sender:', (sender? 'defined':sender));
+            if (sender){
+                bots.forEach(bot => {
+                    if (bot.name === name){
+                        bot.onMessage(sender.socket, message);
+                    }
+                })
+            }
         }
     });
 });

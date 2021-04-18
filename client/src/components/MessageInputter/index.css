@@ -1,6 +1,6 @@
 .message-inputter{
     position: absolute;
-    bottom: 10px;
+    bottom: 5px;
     margin: 10px;
     width: calc(100% - 20px);
 }
@@ -17,12 +17,9 @@
     width: calc(80% - 30px);
     margin-right: 10px;
     box-sizing: border-box;
-    outline: none;
-    border: 1px solid white;
-}
-
-.message-inputter input:focus{
-    border-color: rgb(77, 77, 255);
+    border: none;
+    outline-width: 1px;
+    outline-color: rgb(77, 77, 255);
 }
 
 .message-inputter button{

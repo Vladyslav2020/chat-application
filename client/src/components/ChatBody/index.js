@@ -1,21 +1,30 @@
-import React from 'react';
+import React, {useState} from 'react';
 import UserData from '../UserData';
 import MessagesList from '../MessagesList';
-import ChatsList from '../ChatsList';
+import ChatListController from '../ChatsListController';
 import MessageInputter from '../MessageInputter';
 import './index.css';
+import SearchBar from '../SearchBar';
 
 const ChatBody = ({store, handlers}) => {
+    const [searchBarValue, setSearchBarValue] = useState('');
+    const changeSearchBarValueHandler = (newValue) => {
+        setSearchBarValue(newValue);
+    }
     let currentChatFriend = store.chats.find(chat => (chat.name === store.currentChat.name)) || {};
     return (
         <div className = 'chat-body'>
             <div className = 'left-side'>
-                <UserData name = {currentChatFriend.name} avatar = {currentChatFriend.avatar} description = {currentChatFriend.description}/>
-                <MessagesList messages = {currentChatFriend.messages || []}/>
+                <UserData name = {currentChatFriend.name} 
+                    avatar = {currentChatFriend.avatar} 
+                    description = {currentChatFriend.description}
+                />
+                <MessagesList myName = {store.name} userName = {store.currentChat.name} messages = {currentChatFriend.messages || []}/>
                 <MessageInputter submitMessage = {handlers.submitMessage}/>
             </div>
             <div className = 'right-side'>
-                <ChatsList selected = {currentChatFriend} chats = {store.chats || []} handlers = {handlers}/>
+                <ChatListController searchBar = {searchBarValue} selected = {currentChatFriend} chats = {store.chats || []} handlers = {handlers}/>
+                <SearchBar value = {searchBarValue} changeHandler = {changeSearchBarValueHandler}/>
             </div>
         </div>
     );

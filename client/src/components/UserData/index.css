@@ -1,12 +1,12 @@
 .user-data{
     display: flex;
-    height: 173px;
+    height: 130px;
     font-family: inherit;
 }
 
 .user-data .avatar{
-    width: 173px;
-    height: 173px;
+    width: 130px;
+    height: 130px;
 }
 
 .avatar img{
@@ -14,8 +14,9 @@
 }
 
 .user-data .content{
-    padding: 21px 38px 0 21px;
+    padding: 15px 38px 0 21px;
     background-color: #bdcad9;
+    overflow: auto;
 }
 
 .content .name{

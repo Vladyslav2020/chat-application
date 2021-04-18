@@ -4,7 +4,6 @@ import ChatHeader from './ChatHeader';
 
 
 const App = ({store, handlers}) => {
-    console.log("App prop store", store);
     return (
         <>
             <ChatHeader/>

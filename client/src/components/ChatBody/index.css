@@ -1,13 +1,14 @@
 .chat-body{
     display: flex;
+    position: absolute;
+    height: calc(100% - 100px);
+    min-height: 520px;
     width: 90%;
+    left: 5%;
     background-color: #d6dee7;
     justify-content: space-between;
     border-radius: 8px;
-    margin-top: 20px;
-    margin-bottom: 30px;
-    position: relative;
-    min-height: 500px;
+    margin-top: 15px;
 }
 
 .chat-body .left-side{
@@ -15,14 +16,33 @@
     flex-direction: column;
     box-sizing: border-box;
     position: relative;
+    flex: 3;
 }
 
 .chat-body .right-side{
+    position: relative;
     display: flex;
-    width: 70%;
+    flex-direction: column;
+    flex: 1;
     background-color: white;
     border-top-right-radius: inherit;
     border-bottom-right-radius: inherit;
     box-sizing: border-box;
     position: relative;
+    overflow: auto;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: inherit;
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #c9d4df;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #a4acb4;
+    border-radius: 5px;
 }

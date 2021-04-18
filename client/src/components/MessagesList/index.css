@@ -1,0 +1,10 @@
+.messages-list{
+    position: absolute;
+    width: calc(100% - 10px);
+    box-sizing: border-box;
+    height: calc(100% - 210px);
+    bottom: 65px;
+    overflow: auto;
+    padding: 0 20px 7px;
+    margin-right: 10px;
+}

@@ -1,0 +1,61 @@
+.message{
+    width: 60%;
+    min-width: 500px;
+    border-radius: 5px;
+    box-shadow: 2px 5px 5px 0px rgb(212, 204, 204);
+    position: relative;
+    margin-top: 20px;
+    left: -20%;
+}
+
+.message .arrow{
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    bottom: 15px;
+    left: -7px;
+    transform: rotate(45deg);
+    background-color: white;
+}
+
+.message.mine .arrow{
+    right: calc(-100% - 4px);
+}
+
+.message.mine{
+    left: 20%;
+}
+
+.message .title{
+    display: flex;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background-color: #bdcbd9;
+}
+
+.message.mine .title{
+    background-color: #f0cbb2;
+}
+
+.title .name{
+    padding: 15px 0 15px 18px;
+    font-size: 15px;
+    flex: 5;
+}
+
+.title .time{
+    position: absolute;
+    color: gray;
+    padding: 15px;
+    right: 5px;
+    font-size: 15px;
+    flex: 1;
+}
+
+.message .text{
+    background-color: white;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    font-size: 15px;
+    padding: 17px;
+}
