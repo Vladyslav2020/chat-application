@@ -17,6 +17,7 @@ const MessageInputter = ({submitMessage}) => {
             <form>
                 <input type = 'text' 
                     placeholder = 'Start chatting!' 
+                    autoFocus
                     value = {value}
                     onChange = {changeHandler}/>
                 <button type = 'submit' onClick = {submitHandler}>Send message</button>

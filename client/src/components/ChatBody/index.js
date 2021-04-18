@@ -5,6 +5,7 @@ import ChatListController from '../ChatsListController';
 import MessageInputter from '../MessageInputter';
 import './index.css';
 import SearchBar from '../SearchBar';
+import TypingTracker from '../TypingTracker';
 
 const ChatBody = ({store, handlers}) => {
     const [searchBarValue, setSearchBarValue] = useState('');
@@ -20,6 +21,7 @@ const ChatBody = ({store, handlers}) => {
                     description = {currentChatFriend.description}
                 />
                 <MessagesList myName = {store.name} userName = {store.currentChat.name} messages = {currentChatFriend.messages || []}/>
+                <TypingTracker name = {currentChatFriend.name} typing = {currentChatFriend.typing} />
                 <MessageInputter submitMessage = {handlers.submitMessage}/>
             </div>
             <div className = 'right-side'>

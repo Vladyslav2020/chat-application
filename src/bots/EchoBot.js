@@ -7,11 +7,15 @@ const EchoBot = new ChatBot({name: 'Echo bot',
 });
 
 EchoBot.onMessage = function(socket, message){
-    socket.emit('new-message', {
-        name: this.name, 
-        message,
-        time: new Date().toISOString()
-    })
+    socket.emit('start-typing', {name: this.name});
+    setTimeout(() => {
+        socket.emit('finish-typing', {name: this.name});
+        socket.emit('new-message', {
+            name: this.name, 
+            message,
+            time: new Date().toISOString()
+        });
+    }, 500);
 }
 
 module.exports = EchoBot;

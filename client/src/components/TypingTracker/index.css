@@ -1,0 +1,13 @@
+.typing{
+    position: absolute;
+    z-index: 10;
+    bottom: 60px;
+    color: #428aca;
+    width: 100%;
+    text-align: center;
+    font-size: 15px;
+}
+
+.invisible{
+    display: none;
+}

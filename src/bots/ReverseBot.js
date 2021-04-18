@@ -11,7 +11,9 @@ ReverseBot.onMessage = function(socket, message){
     for (let i = 0; i < message.length; i++){
         newMessage += message[message.length - i - 1];
     }
+    socket.emit('start-typing', {name: this.name});
     setTimeout(() => {
+        socket.emit('finish-typing', {name: this.name});
         socket.emit('new-message', {
             name: this.name, 
             message: newMessage,

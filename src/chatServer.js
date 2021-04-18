@@ -1,10 +1,11 @@
-const bots = require("./utils/bots/ChatBotArray");
+const bots = require("./bots/ChatBotArray");
 const generateId = require("./utils/functions/generateId");
 const getUniqueNameForUser = require("./utils/functions/getUniqueNameForUser");
 const client = require('./utils/defaultUserParams');
 
 function chatServer(io){
     const clients = new Map();
+    bots[2].startSpamming(clients);
     io.on("connection", (socket) => {
         socket.on('get-stored-data', (data) => {
             let currentID = '';

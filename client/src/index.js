@@ -12,19 +12,38 @@ if (storedData){
 socket.emit('get-stored-data', {id: storedData.id, name: storedData.name, description: storedData.description, status: storedData.status});
 const initialState = {name: "", id: "", chats: [], currentChat: {name: ''}};
 let [store, setStore] = [null, null];
-let counter = 0;
 
 socket.on('new-message', (data) => {
-    setStore(prevStore => {
-        prevStore.chats.forEach(chat => {
+    setStore(prevState => {
+        prevState.chats.forEach(chat => {
             if (chat.name === data.name){
                 chat.messages.push({message: data.message, time: data.time, isMyMessage: false});
                 return;
             }
         });
-        return {...prevStore, chats: [...prevStore.chats]};
+        return {...prevState, chats: [...prevState.chats]};
     });
 });
+socket.on('start-typing', (data) => {
+    setStore(prevState => {
+        prevState.chats.forEach(chat => {
+            if (chat.name === data.name){
+                chat.typing = true;
+            }
+        });
+        return {...prevState, chats: prevState.chats};
+    });
+});
+socket.on('finish-typing', (data) => {
+    setStore(prevState => {
+        prevState.chats.forEach(chat => {
+            if (chat.name === data.name){
+                chat.typing = false;
+            }
+        });
+        return {...prevState, chats: prevState.chats};
+    });
+})
 socket.on('set-data', (data, reset) => {
     if (reset){
         setStore(prevState => ({...initialState, ...data}));
@@ -39,8 +58,8 @@ socket.on('add-chat', (newChat) => {
     setStore(prevState => {
         let existChat = prevState.chats.find(chat => newChat.name === chat.name);
         if (!existChat){
-            localStorage.setItem("chat-data", JSON.stringify({...prevState, chats: [...prevState.chats, {...newChat, messages: []}]}))
-            return {...prevState, chats: [...prevState.chats, {...newChat, messages: []}]};
+            localStorage.setItem("chat-data", JSON.stringify({...prevState, chats: [...prevState.chats, {...newChat, typing: false, messages: []}]}))
+            return {...prevState, chats: [...prevState.chats, {...newChat, typing: false, messages: []}]};
         }
         else
             return {...prevState};
@@ -51,7 +70,6 @@ socket.on('add-chat', (newChat) => {
 });
 
 function StoreManager(){
-    console.log(++counter);
     [store, setStore] = useState(initialState);
     const chatSwitcher = (newActiveChat) => {
             setStore(prevState => {
