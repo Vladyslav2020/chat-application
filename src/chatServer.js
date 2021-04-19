@@ -45,24 +45,70 @@ function chatServer(io){
                         avatar: currentClient.avatar, 
                         status: currentClient.status
                     });
+                    currentClient.socket.emit('add-chat', {
+                        name: client.name, 
+                        description: client.description,
+                        avatar: client.avatar, 
+                        status: client.status
+                    });
                 }
             })
         });
         socket.on('sending-message', ({id, name, message, time}) => {
+            const sender = clients.get(id);
+            if (!sender)
+                return;
             Array.from(clients.values()).forEach(client => {
                 if (client.name === name){
-                    client.socket.emit('new-message', {name, message, time});
+                    client.socket.emit('new-message', {name: sender.name, message, time});
                 }
             });
             if (name.includes('bot')){
-                const sender = clients.get(id);
-                if (sender){
-                    bots.forEach(bot => {
-                        if (bot.name === name){
-                            bot.onMessage(sender.socket, message);
-                        }
-                    })
-                }
+                bots.forEach(bot => {
+                    if (bot.name === name){
+                        bot.onMessage(sender.socket, message);
+                    }
+                });
+            }
+        });
+        socket.on('start-typing', ({id, name}) => {
+            const sender = clients.get(id);
+            if (sender){
+                Array.from(clients.values()).forEach(client => {
+                    if (client.name === name){
+                        client.socket.emit('start-typing', {name: sender.name});
+                    }
+                });
+            }
+        });
+        socket.on('finish-typing', ({id, name}) => {
+            const sender = clients.get(id);
+            if (sender){
+                Array.from(clients.values()).forEach(client => {
+                    if (client.name === name){
+                        client.socket.emit('finish-typing', {name: sender.name});
+                    }
+                });
+            }
+        });
+        socket.on('set-status-online', ({id}) => {
+            const sender = clients.get(id);
+            if (sender){
+                Array.from(clients.values()).forEach(client => {
+                    if (client.name !== sender.name){
+                        client.socket.emit('get-status-online', {name: sender.name});
+                    }
+                });
+            }
+        });
+        socket.on('set-status-offline', ({id}) => {
+            const sender = clients.get(id);
+            if (sender){
+                Array.from(clients.values()).forEach(client => {
+                    if (client.name !== sender.name){
+                        client.socket.emit('get-status-offline', {name: sender.name});
+                    }
+                });
             }
         });
     });

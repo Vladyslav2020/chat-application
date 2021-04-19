@@ -1,5 +1,7 @@
 .user-data{
     display: flex;
+    width: 100%;
+    justify-content: space-around;
     height: 130px;
     font-family: inherit;
 }
@@ -7,6 +9,7 @@
 .user-data .avatar{
     width: 130px;
     height: 130px;
+    background-color: rgb(178, 181, 189);
 }
 
 .avatar img{
@@ -17,6 +20,7 @@
     padding: 15px 38px 0 21px;
     background-color: #bdcad9;
     overflow: auto;
+    flex: 3;
 }
 
 .content .name{

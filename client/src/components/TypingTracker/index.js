@@ -4,10 +4,15 @@ import './index.css';
 const TypingTracker = ({name, typing}) => {
     const [dots, setDots] = useState('...');
     useEffect(() => {
-        setInterval(() => {
-            setDots(prevState => prevState.length === 3? '': prevState + '.');
+        let timer = setInterval(() => {
+            if (typing){
+                setDots(prevState => prevState.length === 3? '': prevState + '.');
+            }
         }, 300);
-    }, []);
+        return () => {
+            clearInterval(timer);
+        }
+    }, [typing]);
     return (
         <div className = {typing? 'typing': 'invisible'}>{name} is typing{dots}</div>
     );

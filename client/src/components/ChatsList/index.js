@@ -12,7 +12,7 @@ const ChatsList = ({chats, selected, handlers}) => {
         clickHandler = {handlers.chatSwitcher}
     />) : <div className = 'not-found'>Chats not found</div>;
     return (
-        <div className = 'chat-list'>
+        <div className = 'chats-list'>
             {Chats}
         </div>
     );

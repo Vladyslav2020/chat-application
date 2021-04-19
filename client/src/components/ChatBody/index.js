@@ -12,7 +12,7 @@ const ChatBody = ({store, handlers}) => {
     const changeSearchBarValueHandler = (newValue) => {
         setSearchBarValue(newValue);
     }
-    let currentChatFriend = store.chats.find(chat => (chat.name === store.currentChat.name)) || {};
+    let currentChatFriend = store.chats.find(chat => (chat.name === store.currentChat.name)) || {name: '', avatar:'', description: '', status: '', typing: false};
     return (
         <div className = 'chat-body'>
             <div className = 'left-side'>
@@ -22,7 +22,7 @@ const ChatBody = ({store, handlers}) => {
                 />
                 <MessagesList myName = {store.name} userName = {store.currentChat.name} messages = {currentChatFriend.messages || []}/>
                 <TypingTracker name = {currentChatFriend.name} typing = {currentChatFriend.typing} />
-                <MessageInputter submitMessage = {handlers.submitMessage}/>
+                <MessageInputter typingTracker = {handlers.typingHandler} submitMessage = {handlers.submitMessage}/>
             </div>
             <div className = 'right-side'>
                 <ChatListController searchBar = {searchBarValue} selected = {currentChatFriend} chats = {store.chats || []} handlers = {handlers}/>

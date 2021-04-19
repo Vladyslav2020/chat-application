@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import './index.css';
 
-const MessageInputter = ({submitMessage}) => {
+const MessageInputter = ({submitMessage, typingTracker}) => {
     const [value, setValue] = useState('');
     const changeHandler = (event) => {
+        typingTracker();
         setValue(event.target.value);
     }
     const submitHandler = (event) => {

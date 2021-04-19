@@ -3,3 +3,9 @@
     padding: 10px 15px;
     color: rgb(187, 187, 187);
 }
+
+.chats-list{
+    position: relative;
+    overflow: auto;
+    height: calc(100% - 110px);
+}
