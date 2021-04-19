@@ -94,6 +94,7 @@ function chatServer(io){
         socket.on('set-status-online', ({id}) => {
             const sender = clients.get(id);
             if (sender){
+                sender.status = 'online';
                 Array.from(clients.values()).forEach(client => {
                     if (client.name !== sender.name){
                         client.socket.emit('get-status-online', {name: sender.name});
@@ -104,6 +105,7 @@ function chatServer(io){
         socket.on('set-status-offline', ({id}) => {
             const sender = clients.get(id);
             if (sender){
+                sender.status = 'offline';
                 Array.from(clients.values()).forEach(client => {
                     if (client.name !== sender.name){
                         client.socket.emit('get-status-offline', {name: sender.name});
@@ -111,6 +113,17 @@ function chatServer(io){
                 });
             }
         });
+        socket.on('disconnect', () => {
+            let currentClient = {name: ''};
+            Array.from(clients.values()).forEach(client => {
+                if (client.socket === socket){
+                    currentClient.name = client.name;
+                }
+            });
+            Array.from(clients.values()).forEach(client => {
+                client.socket.emit('get-status-offline', {name: currentClient.name});
+            });
+         });
     });
 }
 

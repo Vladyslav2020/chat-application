@@ -22,6 +22,7 @@ window.onfocus = () => {
     if (store.status !== 'online'){
         socket.emit('set-status-online', {id: store.id});
         setStore(prevState => {
+            localStorage.setItem("chat-data", JSON.stringify({...prevState, status: 'online'}));
             return {...prevState, status: 'online'};
         })
     }
@@ -29,10 +30,13 @@ window.onfocus = () => {
 
 window.onblur = () => {
     if (store.status === 'online'){
-        socket.emit('set-status-offline', {id: store.id});
-        setStore(prevState => {
-            return {...prevState, status: 'offline'};
-        })
+        setTimeout(() => {
+            socket.emit('set-status-offline', {id: store.id});
+            setStore(prevState => {
+                localStorage.setItem("chat-data", JSON.stringify({...prevState, status: 'offline'}));
+                return {...prevState, status: 'offline'};
+            });
+        }, 1000);
     }
 }
 
@@ -41,9 +45,9 @@ socket.on('new-message', (data) => {
         prevState.chats.forEach(chat => {
             if (chat.name === data.name){
                 chat.messages.push({message: data.message, time: data.time, isMyMessage: false});
-                return;
             }
         });
+        localStorage.setItem("chat-data", JSON.stringify({...prevState, chats: [...prevState.chats]}));
         return {...prevState, chats: [...prevState.chats]};
     });
 });
@@ -54,6 +58,7 @@ socket.on('start-typing', (data) => {
                 chat.typing = true;
             }
         });
+        localStorage.setItem("chat-data", JSON.stringify({...prevState, chats: prevState.chats}));
         return {...prevState, chats: prevState.chats};
     });
 });
@@ -64,6 +69,7 @@ socket.on('finish-typing', (data) => {
                 chat.typing = false;
             }
         });
+        localStorage.setItem("chat-data", JSON.stringify({...prevState, chats: prevState.chats}));
         return {...prevState, chats: prevState.chats};
     });
 })
@@ -81,14 +87,17 @@ socket.on('add-chat', (newChat) => {
     setStore(prevState => {
         let existChat = prevState.chats.find(chat => newChat.name === chat.name);
         if (!existChat){
-            localStorage.setItem("chat-data", JSON.stringify({...prevState, chats: [...prevState.chats, {...newChat, typing: false, messages: []}]}))
+            localStorage.setItem("chat-data", JSON.stringify({...prevState, chats: [...prevState.chats, {...newChat, typing: false, messages: []}]}));
             return {...prevState, chats: [...prevState.chats, {...newChat, typing: false, messages: []}]};
         }
         else
             return {...prevState};
     });
     if (store.chats.length > 0){
-        setStore(prevState => ({...prevState, currentChat: {name: store.chats[0].name}}));
+        setStore(prevState => {
+            localStorage.setItem("chat-data", JSON.stringify({...prevState, currentChat: {name: store.chats[0].name}}));
+            return {...prevState, currentChat: {name: store.chats[0].name}};
+        });
     }
 });
 
@@ -98,7 +107,8 @@ socket.on('get-status-online', ({name}) => {
             if (chat.name === name){
                 chat.status = 'online';
             }
-        })
+        });
+        localStorage.setItem("chat-data", JSON.stringify({...prevState, chats: prevState.chats}));
         return {...prevState, chats: prevState.chats};
     });
 });
@@ -109,7 +119,8 @@ socket.on('get-status-offline', ({name}) => {
             if (chat.name === name){
                 chat.status = 'offline';
             }
-        })
+        });
+        localStorage.setItem("chat-data", JSON.stringify({...prevState, chats: prevState.chats}));
         return {...prevState, chats: prevState.chats};
     });
 });
@@ -120,6 +131,7 @@ function StoreManager(){
         if (store.typing.status){
             socket.emit('finish-typing', {id: store.id, name: store.currentChat.name});
             setStore(prevState => {
+                localStorage.setItem("chat-data", JSON.stringify({...prevState, typing: {status: false, lastTime: 0}}));
                 return {...prevState, typing: {status: false, lastTime: 0}};
             })
         }
@@ -132,6 +144,7 @@ function StoreManager(){
         if (store.typing.status){
             socket.emit('finish-typing', {id: store.id, name: store.currentChat.name});
             setStore(prevState => {
+                localStorage.setItem("chat-data", JSON.stringify({...prevState, typing: {status: false, lastTime: 0}}));
                 return {...prevState, typing: {status: false, lastTime: 0}};
             })
         }
@@ -140,9 +153,9 @@ function StoreManager(){
             prevState.chats.forEach(chat => {
                 if (chat.name === prevState.currentChat.name){
                     chat.messages.push({message: message, time: currentTime, isMyMessage: true});
-                    return;
                 }
             });
+            localStorage.setItem("chat-data", JSON.stringify({...prevState, chats: [...prevState.chats]}));
             return {...prevState, chats: [...prevState.chats]};
         });
         socket.emit('sending-message', {id: store.id, name: store.currentChat.name, message: message, time: currentTime});
@@ -151,11 +164,13 @@ function StoreManager(){
         if (!store.typing.status){
             socket.emit('start-typing', {id: store.id, name: store.currentChat.name});
             setStore(prevState => {
+                localStorage.setItem("chat-data", JSON.stringify({...prevState, typing: {status: true, lastTime: Date.now()}}));
                 return {...prevState, typing: {status: true, lastTime: Date.now()}};
             });
         }
         else{
             setStore(prevState => {
+                localStorage.setItem("chat-data", JSON.stringify({...prevState, typing: {status: true, lastTime: Date.now()}}));
                 return {...prevState, typing: {status: true, lastTime: Date.now()}};
             });
         }
@@ -163,6 +178,7 @@ function StoreManager(){
             if (store.typing.status && Date.now() - store.typing.lastTime >= 500){
                 socket.emit('finish-typing', {id: store.id, name: store.currentChat.name});
                 setStore(prevState => {
+                    localStorage.setItem("chat-data", JSON.stringify({...prevState, typing: {status: false, lastTime: 0}}));
                     return {...prevState, typing: {status: false, lastTime: 0}};
                 });
             }
