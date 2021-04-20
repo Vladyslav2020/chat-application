@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "lint:fix": "prettier --write \"{src,client}/**/*.js\" t.js",
     "start-client": "npm run start --prefix client",
     "start-server": "nodemon index"
   },
@@ -17,6 +18,9 @@
     "socket.io-client": "^4.0.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.7"
+    "babel-eslint": "^10.1.0",
+    "eslint-plugin-prettier": "^2.6.2",
+    "nodemon": "^2.0.7",
+    "prettier": "^1.13.7"
   }
 }
