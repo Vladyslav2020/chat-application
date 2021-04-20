@@ -8,6 +8,10 @@ This project is a fully functional application. It consists of a chat server and
 
 ## How to install this application
 
+First of all you need to clone this repository.
+
+### `git clone git@github.com:Vladyslav2020/chat-application.git`
+
 In the project directory, you need to run:
 
 ### `npm install`
@@ -22,4 +26,3 @@ Runs the chat server to process all requests.
 
 Runs the app in the development mode.
 Open http://localhost:3000 to view it in the browser.
-
