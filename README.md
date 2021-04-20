@@ -10,7 +10,9 @@ This project is a fully functional application. It consists of a chat server and
 
 First of all you need to clone this repository.
 
-### `git clone git@github.com:Vladyslav2020/chat-application.git`
+```
+$ git clone git@github.com:Vladyslav2020/chat-application.git
+```
 
 In the project directory, you need to run:
 
