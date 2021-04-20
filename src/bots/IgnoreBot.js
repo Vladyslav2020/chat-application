@@ -6,6 +6,8 @@ const IgnoreBot = new ChatBot({name: 'Ignore bot',
     status: 'online'
 });
 
-IgnoreBot.onMessage = function(socket, message){}
+IgnoreBot.onMessage = function(socket, message){
+    socket.emit('get-last-seen', {name: this.name, time: new Date().toISOString()});
+}
 
 module.exports = IgnoreBot;

@@ -113,6 +113,18 @@ function chatServer(io){
                 });
             }
         });
+        
+        socket.on('set-last-seen', ({id, name, time}) => {
+            const sender = clients.get(id);
+            if (sender){
+                Array.from(clients.values()).forEach(client => {
+                    if (client.name === name){
+                        client.socket.emit('get-last-seen', {name: sender.name, time});
+                    }
+                });
+            }
+        });
+
         socket.on('disconnect', () => {
             let currentClient = {name: ''};
             Array.from(clients.values()).forEach(client => {
@@ -122,6 +134,7 @@ function chatServer(io){
             });
             Array.from(clients.values()).forEach(client => {
                 client.socket.emit('get-status-offline', {name: currentClient.name});
+                client.socket.emit('delete-user', {name: currentClient.name});
             });
          });
     });

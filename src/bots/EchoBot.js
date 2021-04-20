@@ -7,6 +7,7 @@ const EchoBot = new ChatBot({name: 'Echo bot',
 });
 
 EchoBot.onMessage = function(socket, message){
+    socket.emit('get-last-seen', {name: this.name, time: new Date().toISOString()});
     socket.emit('start-typing', {name: this.name});
     setTimeout(() => {
         socket.emit('finish-typing', {name: this.name});

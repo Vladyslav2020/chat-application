@@ -8,7 +8,9 @@ const SpamBot = new ChatBot({name: 'Spam bot',
     status: 'online'
 });
 
-SpamBot.onMessage = function(socket, message){}
+SpamBot.onMessage = function(socket, message){
+    socket.emit('get-last-seen', {name: this.name, time: new Date().toISOString()});
+}
 
 SpamBot.startSpamming = function(clients){
     let preparedSpamTimeout = [];

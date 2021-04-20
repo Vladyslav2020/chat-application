@@ -7,6 +7,7 @@ const ReverseBot = new ChatBot({name: 'Reverse bot',
 });
 
 ReverseBot.onMessage = function(socket, message){
+    socket.emit('get-last-seen', {name: this.name, time: new Date().toISOString()});
     let newMessage = '';
     for (let i = 0; i < message.length; i++){
         newMessage += message[message.length - i - 1];

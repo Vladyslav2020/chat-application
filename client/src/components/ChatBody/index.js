@@ -20,7 +20,11 @@ const ChatBody = ({store, handlers}) => {
                     avatar = {currentChatFriend.avatar} 
                     description = {currentChatFriend.description}
                 />
-                <MessagesList myName = {store.name} userName = {store.currentChat.name} messages = {currentChatFriend.messages || []}/>
+                <MessagesList myName = {store.name} 
+                    userName = {store.currentChat.name} 
+                    messages = {currentChatFriend.messages || []}
+                    lastSeen = {currentChatFriend.lastSeen}
+                />
                 <TypingTracker name = {currentChatFriend.name} typing = {currentChatFriend.typing} />
                 <MessageInputter typingTracker = {handlers.typingHandler} submitMessage = {handlers.submitMessage}/>
             </div>
