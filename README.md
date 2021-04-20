@@ -8,10 +8,16 @@ This project is a fully functional application. It consists of a chat server and
 
 ## How to install this application
 
-First of all you need to clone this repository.
+First of all you need to clone this repository:
 
 ```
 $ git clone git@github.com:Vladyslav2020/chat-application.git
+```
+
+After that, you need to go to project directory:
+
+```
+$ cd chat-application
 ```
 
 In the project directory, you need to run:
