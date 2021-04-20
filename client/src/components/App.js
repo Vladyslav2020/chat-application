@@ -4,10 +4,11 @@ import ChatHeader from './ChatHeader';
 
 
 const App = ({store, handlers}) => {
+    const [hiddenSide, setHiddenSide] = useState('right');
     return (
         <>
-            <ChatHeader/>
-            <ChatBody store = {store} handlers = {handlers}/>
+            <ChatHeader hiddenSide = {hiddenSide} changeVisibleSide = {setHiddenSide}/>
+            <ChatBody store = {store} handlers = {{...handlers, changeVisibleSide: setHiddenSide}} hiddenSide = {hiddenSide} />
         </>
     );
 }

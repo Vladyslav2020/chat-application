@@ -22,7 +22,7 @@ const MessagesList = ({myName, userName, messages, lastSeen}) => {
             return (
                 <>
                     {newMessage}
-                    <div className = 'seen-tracker'>
+                    <div key = {index * 100 + 100} className = 'seen-tracker'>
                         Seen {new Date(lastSeen).toLocaleString('en-US', { 
                             hour: 'numeric', 
                             minute: 'numeric', 

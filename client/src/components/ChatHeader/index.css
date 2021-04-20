@@ -5,3 +5,29 @@
     font-size: 32px;
     background-color: white;
 }
+
+.come-back{
+    display: none;
+    color: rgb(69, 104, 201);
+    font-weight: bolder;
+    font-size: 32px;
+    cursor: pointer;
+    margin-right: 30px;
+    padding: 5px 10px;
+    border: 1px solid rgb(69, 104, 201);
+    border-radius: 10px;
+}
+
+@media screen and (max-width: 900px) {
+    .come-back{
+        display: inline;
+    }
+    .come-back.hidden{
+        display: none;
+    }
+}
+
+.come-back:hover{
+    color: white;
+    background-color:rgb(69, 104, 201);
+}

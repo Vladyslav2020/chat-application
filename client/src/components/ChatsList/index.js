@@ -9,7 +9,7 @@ const ChatsList = ({chats, selected, handlers}) => {
         avatar = {chat.avatar} 
         description = {chat.description}
         status = {chat.status}
-        clickHandler = {handlers.chatSwitcher}
+        handlers = {{clickHandler: handlers.chatSwitcher, changeVisibleSide: handlers.changeVisibleSide}}
     />) : <div className = 'not-found'>Chats not found</div>;
     return (
         <div className = 'chats-list'>

@@ -37,3 +37,18 @@
 ::placeholder{
     font-size: 14px;
 }
+
+@media screen and (max-width: 600px) {
+    .message-inputter form{
+        flex-direction: column;
+        justify-content: center;
+    }
+    .message-inputter button{
+        margin-top: 10px;
+        width: 50%;
+        min-width: 100px;
+    }
+    .message-inputter input{
+        width: 100%;
+    }
+}

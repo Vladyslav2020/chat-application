@@ -60,3 +60,15 @@
     font-size: 15px;
     padding: 17px;
 }
+
+@media screen and (max-width: 570px) {
+    .message{
+        width: 100%;
+        min-width: 100px;
+        box-sizing: border-box;
+        left: 0;
+    }
+    .message.mine {
+        left: 0;
+    }
+}

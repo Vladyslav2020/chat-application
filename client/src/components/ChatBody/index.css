@@ -32,6 +32,49 @@
     overflow: auto;
 }
 
+@media screen and (max-width: 1000px) {
+    .chat-body{
+        width: 100%;
+        left: 0;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .chat-body{
+        width: 80%;
+        left: 10%;
+    }
+    .chat-body .left-side{
+        width: 100%;
+    }
+    .chat-body .right-side{
+        width: 100%;
+    }
+    .chat-body .hidden{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .chat-body{
+        width: 90%;
+        left: 5%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .chat-body{
+        width: 100%;
+        left: 0;
+    }
+    .chat-body .left-side{
+        width: 100%;
+    }
+    .chat-body .right-side{
+        width: 90%;
+    }
+}
+
 ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
