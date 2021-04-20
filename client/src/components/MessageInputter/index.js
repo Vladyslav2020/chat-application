@@ -15,13 +15,7 @@ const MessageInputter = ({ submitMessage, typingTracker }) => {
 	return (
 		<div className="message-inputter">
 			<form>
-				<input
-					type="text"
-					placeholder="Start chatting!"
-					autoFocus
-					value={value}
-					onChange={changeHandler}
-				/>
+				<input type="text" placeholder="Start chatting!" autoFocus value={value} onChange={changeHandler} />
 				<button type="submit" onClick={submitHandler}>
 					Send message
 				</button>

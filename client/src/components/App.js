@@ -7,11 +7,7 @@ const App = ({ store, handlers }) => {
 	return (
 		<>
 			<ChatHeader hiddenSide={hiddenSide} changeVisibleSide={setHiddenSide} />
-			<ChatBody
-				store={store}
-				handlers={{ ...handlers, changeVisibleSide: setHiddenSide }}
-				hiddenSide={hiddenSide}
-			/>
+			<ChatBody store={store} handlers={{ ...handlers, changeVisibleSide: setHiddenSide }} hiddenSide={hiddenSide} />
 		</>
 	);
 };

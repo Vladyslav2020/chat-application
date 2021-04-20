@@ -7,10 +7,7 @@ const ChatListItem = ({ name, avatar, description, status, selected, handlers })
 		handlers.changeVisibleSide('right');
 	};
 	return (
-		<div
-			className={`chat-list-item ${selected && 'selected'}`}
-			onClick={clickHandler}
-		>
+		<div className={`chat-list-item ${selected && 'selected'}`} onClick={clickHandler}>
 			<div className="avatar">
 				<img src={avatar} />
 				<div className={`status ${status}`}></div>

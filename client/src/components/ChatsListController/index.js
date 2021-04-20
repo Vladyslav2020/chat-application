@@ -13,24 +13,14 @@ const ChatsListController = ({ chats, selected, handlers, searchBar }) => {
 	return (
 		<>
 			<div className="tab-list">
-				<div
-					className={`tab ${selectedTab === 'online' && 'selected'}`}
-					onClick={tabClickHandler.bind(null, 'online')}
-				>
+				<div className={`tab ${selectedTab === 'online' && 'selected'}`} onClick={tabClickHandler.bind(null, 'online')}>
 					Online
 				</div>
-				<div
-					className={`tab ${selectedTab === 'all' && 'selected'}`}
-					onClick={tabClickHandler.bind(null, 'all')}
-				>
+				<div className={`tab ${selectedTab === 'all' && 'selected'}`} onClick={tabClickHandler.bind(null, 'all')}>
 					All
 				</div>
 			</div>
-			<ChatsList
-				chats={filteredChats}
-				selected={selected}
-				handlers={handlers}
-			/>
+			<ChatsList chats={filteredChats} selected={selected} handlers={handlers} />
 		</>
 	);
 };

@@ -6,9 +6,7 @@ const TypingTracker = ({ name, typing }) => {
 	useEffect(() => {
 		let timer = setInterval(() => {
 			if (typing) {
-				setDots(prevState =>
-					prevState.length === 3 ? '' : prevState + '.',
-				);
+				setDots(prevState => (prevState.length === 3 ? '' : prevState + '.'));
 			}
 		}, 300);
 		return () => {
