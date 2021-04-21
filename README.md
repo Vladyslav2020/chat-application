@@ -22,9 +22,25 @@ $ cd chat-application
 
 In the project directory, you need to run:
 
-### `npm run install-all`
+### `npm install`
 
-Installs all required packages.
+Installs all required packages for back-end.
+
+```
+$ cd client
+```
+
+Goes to the client side.
+
+### `npm install`
+
+Installs all required packages for front-end.
+
+```
+$ cd ../
+```
+
+Goes back to the root of the application.
 
 ### `npm run start-server`
 

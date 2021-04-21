@@ -7,8 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint:fix": "prettier --write \"{src,client}/**/*.js\" index.js",
     "start-client": "npm run start --prefix client",
-    "start-server": "nodemon index",
-    "install-all": "npm install && npm install --prefix client"
+    "start-server": "nodemon index"
   },
   "keywords": [],
   "author": "",
