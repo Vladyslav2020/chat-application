@@ -22,7 +22,7 @@ $ cd chat-application
 
 In the project directory, you need to run:
 
-### `npm install`
+### `npm run install-all`
 
 Installs all required packages.
 

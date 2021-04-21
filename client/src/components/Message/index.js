@@ -7,7 +7,10 @@ const Message = ({ name, message, time, isMyMessage, needToScroll }) => {
 		if (needToScroll) myRef.current.scrollIntoView();
 	}, [myRef]);
 	return (
-		<div ref={needToScroll ? myRef : null} className={`message ${isMyMessage ? 'mine' : ''}`}>
+		<div
+			ref={needToScroll ? myRef : null}
+			className={`message ${isMyMessage ? 'mine' : ''}`}
+		>
 			<div className="arrow"></div>
 			<div className="title">
 				<div className="name">{name}</div>

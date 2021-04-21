@@ -5,7 +5,7 @@ import './index.css';
 const ChatsList = ({ chats, selected, handlers }) => {
 	const Chats =
 		chats.length > 0 ? (
-			chats.map(chat => (
+			chats.map((chat) => (
 				<ChatListItem
 					selected={chat.name === selected.name}
 					key={chat.name}

@@ -4,7 +4,9 @@ import './index.css';
 
 const MessagesList = ({ myName, userName, messages, lastSeen }) => {
 	let lastSeenMessageIndex = -1;
-	const isMyMessageLast = messages.length ? messages[messages.length - 1].isMyMessage : false;
+	const isMyMessageLast = messages.length
+		? messages[messages.length - 1].isMyMessage
+		: false;
 	for (let i = 0; i < messages.length; i++) {
 		if (messages[i].isMyMessage && new Date(messages[i].time) < new Date(lastSeen)) {
 			lastSeenMessageIndex = i;

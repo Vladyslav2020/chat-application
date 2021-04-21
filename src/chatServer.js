@@ -6,8 +6,8 @@ const client = require('./utils/defaultUserParams');
 function chatServer(io) {
 	const clients = new Map();
 	bots[2].startSpamming(clients);
-	io.on('connection', socket => {
-		socket.on('get-stored-data', data => {
+	io.on('connection', (socket) => {
+		socket.on('get-stored-data', (data) => {
 			let currentID = '';
 			if (!data || !clients.get(data.id)) {
 				const name = getUniqueNameForUser();
@@ -32,7 +32,7 @@ function chatServer(io) {
 					},
 					(reset = true),
 				);
-				bots.forEach(bot => {
+				bots.forEach((bot) => {
 					socket.emit('add-chat', {
 						name: bot.name,
 						description: bot.description,
@@ -53,7 +53,7 @@ function chatServer(io) {
 				socket.emit('set-data', {}, (reset = false));
 			}
 			const currentClient = clients.get(currentID);
-			Array.from(clients.values()).forEach(client => {
+			Array.from(clients.values()).forEach((client) => {
 				if (client.id !== currentClient.id) {
 					client.socket.emit('add-chat', {
 						name: currentClient.name,
@@ -73,7 +73,7 @@ function chatServer(io) {
 		socket.on('sending-message', ({ id, name, message, time }) => {
 			const sender = clients.get(id);
 			if (!sender) return;
-			Array.from(clients.values()).forEach(client => {
+			Array.from(clients.values()).forEach((client) => {
 				if (client.name === name) {
 					client.socket.emit('new-message', {
 						name: sender.name,
@@ -83,7 +83,7 @@ function chatServer(io) {
 				}
 			});
 			if (name.includes('bot')) {
-				bots.forEach(bot => {
+				bots.forEach((bot) => {
 					if (bot.name === name) {
 						bot.onMessage(sender.socket, message);
 					}
@@ -93,7 +93,7 @@ function chatServer(io) {
 		socket.on('start-typing', ({ id, name }) => {
 			const sender = clients.get(id);
 			if (sender) {
-				Array.from(clients.values()).forEach(client => {
+				Array.from(clients.values()).forEach((client) => {
 					if (client.name === name) {
 						client.socket.emit('start-typing', { name: sender.name });
 					}
@@ -103,7 +103,7 @@ function chatServer(io) {
 		socket.on('finish-typing', ({ id, name }) => {
 			const sender = clients.get(id);
 			if (sender) {
-				Array.from(clients.values()).forEach(client => {
+				Array.from(clients.values()).forEach((client) => {
 					if (client.name === name) {
 						client.socket.emit('finish-typing', { name: sender.name });
 					}
@@ -114,7 +114,7 @@ function chatServer(io) {
 			const sender = clients.get(id);
 			if (sender) {
 				sender.status = 'online';
-				Array.from(clients.values()).forEach(client => {
+				Array.from(clients.values()).forEach((client) => {
 					if (client.name !== sender.name) {
 						client.socket.emit('get-status-online', {
 							name: sender.name,
@@ -127,7 +127,7 @@ function chatServer(io) {
 			const sender = clients.get(id);
 			if (sender) {
 				sender.status = 'offline';
-				Array.from(clients.values()).forEach(client => {
+				Array.from(clients.values()).forEach((client) => {
 					if (client.name !== sender.name) {
 						client.socket.emit('get-status-offline', {
 							name: sender.name,
@@ -140,7 +140,7 @@ function chatServer(io) {
 		socket.on('set-last-seen', ({ id, name, time }) => {
 			const sender = clients.get(id);
 			if (sender) {
-				Array.from(clients.values()).forEach(client => {
+				Array.from(clients.values()).forEach((client) => {
 					if (client.name === name) {
 						client.socket.emit('get-last-seen', {
 							name: sender.name,
@@ -153,12 +153,12 @@ function chatServer(io) {
 
 		socket.on('disconnect', () => {
 			let currentClient = { name: '' };
-			Array.from(clients.values()).forEach(client => {
+			Array.from(clients.values()).forEach((client) => {
 				if (client.socket === socket) {
 					currentClient.name = client.name;
 				}
 			});
-			Array.from(clients.values()).forEach(client => {
+			Array.from(clients.values()).forEach((client) => {
 				client.socket.emit('get-status-offline', {
 					name: currentClient.name,
 				});

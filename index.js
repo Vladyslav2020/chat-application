@@ -10,10 +10,10 @@ server.listen(process.env.PORT, () => {
 	console.log('Server was started on PORT', process.env.PORT);
 });
 const io = require('socket.io')(server, {
-    cors: {
-        origin: "*",
-        methods: ["GET", "POST"]
-    }
+	cors: {
+		origin: '*',
+		methods: ['GET', 'POST'],
+	},
 });
 
 chatServer(io);

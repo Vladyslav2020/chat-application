@@ -37,8 +37,11 @@ window.onfocus = () => {
 			name: store.currentChat.name,
 			time: new Date().toISOString(),
 		});
-		setStore(prevState => {
-			localStorage.setItem('chat-data', JSON.stringify({ ...prevState, status: 'online' }));
+		setStore((prevState) => {
+			localStorage.setItem(
+				'chat-data',
+				JSON.stringify({ ...prevState, status: 'online' }),
+			);
 			return { ...prevState, status: 'online' };
 		});
 	}
@@ -48,17 +51,20 @@ window.onblur = () => {
 	if (store.status === 'online') {
 		setTimeout(() => {
 			socket.emit('set-status-offline', { id: store.id });
-			setStore(prevState => {
-				localStorage.setItem('chat-data', JSON.stringify({ ...prevState, status: 'offline' }));
+			setStore((prevState) => {
+				localStorage.setItem(
+					'chat-data',
+					JSON.stringify({ ...prevState, status: 'offline' }),
+				);
 				return { ...prevState, status: 'offline' };
 			});
 		}, 1000);
 	}
 };
 
-socket.on('new-message', data => {
-	setStore(prevState => {
-		prevState.chats.forEach(chat => {
+socket.on('new-message', (data) => {
+	setStore((prevState) => {
+		prevState.chats.forEach((chat) => {
 			if (chat.name === data.name) {
 				chat.messages.push({
 					message: data.message,
@@ -74,44 +80,56 @@ socket.on('new-message', data => {
 				}
 			}
 		});
-		localStorage.setItem('chat-data', JSON.stringify({ ...prevState, chats: [...prevState.chats] }));
+		localStorage.setItem(
+			'chat-data',
+			JSON.stringify({ ...prevState, chats: [...prevState.chats] }),
+		);
 		return { ...prevState, chats: [...prevState.chats] };
 	});
 });
-socket.on('start-typing', data => {
-	setStore(prevState => {
-		prevState.chats.forEach(chat => {
+socket.on('start-typing', (data) => {
+	setStore((prevState) => {
+		prevState.chats.forEach((chat) => {
 			if (chat.name === data.name) {
 				chat.typing = true;
 			}
 		});
-		localStorage.setItem('chat-data', JSON.stringify({ ...prevState, chats: prevState.chats }));
+		localStorage.setItem(
+			'chat-data',
+			JSON.stringify({ ...prevState, chats: prevState.chats }),
+		);
 		return { ...prevState, chats: prevState.chats };
 	});
 });
-socket.on('finish-typing', data => {
-	setStore(prevState => {
-		prevState.chats.forEach(chat => {
+socket.on('finish-typing', (data) => {
+	setStore((prevState) => {
+		prevState.chats.forEach((chat) => {
 			if (chat.name === data.name) {
 				chat.typing = false;
 			}
 		});
-		localStorage.setItem('chat-data', JSON.stringify({ ...prevState, chats: prevState.chats }));
+		localStorage.setItem(
+			'chat-data',
+			JSON.stringify({ ...prevState, chats: prevState.chats }),
+		);
 		return { ...prevState, chats: prevState.chats };
 	});
 });
 socket.on('set-data', (data, reset) => {
 	if (reset) {
-		setStore(prevState => ({ ...initialState, ...data }));
+		setStore((prevState) => ({ ...initialState, ...data }));
 		localStorage.setItem('chat-data', JSON.stringify({ ...initialState, ...data }));
 	} else {
-		setStore(prevState => ({ ...prevState, ...(storedData || {}), ...data }));
-		localStorage.setItem('chat-data', JSON.stringify({ ...(storedData || {}), ...data }));
+		setStore((prevState) => ({ ...prevState, ...(storedData || {}), ...data }));
+		localStorage.setItem(
+			'chat-data',
+			JSON.stringify({ ...(storedData || {}), ...data }),
+		);
 	}
 });
-socket.on('add-chat', newChat => {
-	setStore(prevState => {
-		let existChat = prevState.chats.find(chat => newChat.name === chat.name);
+socket.on('add-chat', (newChat) => {
+	setStore((prevState) => {
+		let existChat = prevState.chats.find((chat) => newChat.name === chat.name);
 		if (!existChat) {
 			localStorage.setItem(
 				'chat-data',
@@ -135,7 +153,7 @@ socket.on('add-chat', newChat => {
 		} else return { ...prevState };
 	});
 	if (store.chats.length > 0) {
-		setStore(prevState => {
+		setStore((prevState) => {
 			localStorage.setItem(
 				'chat-data',
 				JSON.stringify({
@@ -149,37 +167,46 @@ socket.on('add-chat', newChat => {
 });
 
 socket.on('get-status-online', ({ name }) => {
-	setStore(prevState => {
-		prevState.chats.forEach(chat => {
+	setStore((prevState) => {
+		prevState.chats.forEach((chat) => {
 			if (chat.name === name) {
 				chat.status = 'online';
 			}
 		});
-		localStorage.setItem('chat-data', JSON.stringify({ ...prevState, chats: prevState.chats }));
+		localStorage.setItem(
+			'chat-data',
+			JSON.stringify({ ...prevState, chats: prevState.chats }),
+		);
 		return { ...prevState, chats: prevState.chats };
 	});
 });
 
 socket.on('get-status-offline', ({ name }) => {
-	setStore(prevState => {
-		prevState.chats.forEach(chat => {
+	setStore((prevState) => {
+		prevState.chats.forEach((chat) => {
 			if (chat.name === name) {
 				chat.status = 'offline';
 			}
 		});
-		localStorage.setItem('chat-data', JSON.stringify({ ...prevState, chats: prevState.chats }));
+		localStorage.setItem(
+			'chat-data',
+			JSON.stringify({ ...prevState, chats: prevState.chats }),
+		);
 		return { ...prevState, chats: prevState.chats };
 	});
 });
 
 socket.on('delete-user', ({ name }) => {
-	setStore(prevState => {
-		const filteredChats = prevState.chats.filter(chat => chat.name !== name);
-		localStorage.setItem('chat-data', JSON.stringify({ ...prevState, chats: filteredChats }));
+	setStore((prevState) => {
+		const filteredChats = prevState.chats.filter((chat) => chat.name !== name);
+		localStorage.setItem(
+			'chat-data',
+			JSON.stringify({ ...prevState, chats: filteredChats }),
+		);
 		return { ...prevState, chats: filteredChats };
 	});
 	if (store.chats.length > 0) {
-		setStore(prevState => {
+		setStore((prevState) => {
 			localStorage.setItem(
 				'chat-data',
 				JSON.stringify({
@@ -192,26 +219,29 @@ socket.on('delete-user', ({ name }) => {
 	}
 });
 socket.on('get-last-seen', ({ name, time }) => {
-	setStore(prevState => {
-		prevState.chats.forEach(chat => {
+	setStore((prevState) => {
+		prevState.chats.forEach((chat) => {
 			if (chat.name === name) {
 				chat.lastSeen = time;
 			}
 		});
-		localStorage.setItem('chat-data', JSON.stringify({ ...prevState, chats: prevState.chats }));
+		localStorage.setItem(
+			'chat-data',
+			JSON.stringify({ ...prevState, chats: prevState.chats }),
+		);
 		return { ...prevState, chats: prevState.chats };
 	});
 });
 
 function StoreManager() {
 	[store, setStore] = useState(initialState);
-	const chatSwitcher = newActiveChat => {
+	const chatSwitcher = (newActiveChat) => {
 		if (store.typing.status) {
 			socket.emit('finish-typing', {
 				id: store.id,
 				name: store.currentChat.name,
 			});
-			setStore(prevState => {
+			setStore((prevState) => {
 				localStorage.setItem(
 					'chat-data',
 					JSON.stringify({
@@ -222,7 +252,7 @@ function StoreManager() {
 				return { ...prevState, typing: { status: false, lastTime: 0 } };
 			});
 		}
-		setStore(prevState => {
+		setStore((prevState) => {
 			localStorage.setItem(
 				'chat-data',
 				JSON.stringify({
@@ -240,13 +270,13 @@ function StoreManager() {
 			});
 		}
 	};
-	const submitMessage = message => {
+	const submitMessage = (message) => {
 		if (store.typing.status) {
 			socket.emit('finish-typing', {
 				id: store.id,
 				name: store.currentChat.name,
 			});
-			setStore(prevState => {
+			setStore((prevState) => {
 				localStorage.setItem(
 					'chat-data',
 					JSON.stringify({
@@ -258,8 +288,8 @@ function StoreManager() {
 			});
 		}
 		let currentTime = new Date().toISOString();
-		setStore(prevState => {
-			prevState.chats.forEach(chat => {
+		setStore((prevState) => {
+			prevState.chats.forEach((chat) => {
 				if (chat.name === prevState.currentChat.name) {
 					chat.messages.push({
 						message: message,
@@ -268,7 +298,10 @@ function StoreManager() {
 					});
 				}
 			});
-			localStorage.setItem('chat-data', JSON.stringify({ ...prevState, chats: [...prevState.chats] }));
+			localStorage.setItem(
+				'chat-data',
+				JSON.stringify({ ...prevState, chats: [...prevState.chats] }),
+			);
 			return { ...prevState, chats: [...prevState.chats] };
 		});
 		socket.emit('sending-message', {
@@ -284,7 +317,7 @@ function StoreManager() {
 				id: store.id,
 				name: store.currentChat.name,
 			});
-			setStore(prevState => {
+			setStore((prevState) => {
 				localStorage.setItem(
 					'chat-data',
 					JSON.stringify({
@@ -298,7 +331,7 @@ function StoreManager() {
 				};
 			});
 		} else {
-			setStore(prevState => {
+			setStore((prevState) => {
 				localStorage.setItem(
 					'chat-data',
 					JSON.stringify({
@@ -318,7 +351,7 @@ function StoreManager() {
 					id: store.id,
 					name: store.currentChat.name,
 				});
-				setStore(prevState => {
+				setStore((prevState) => {
 					localStorage.setItem(
 						'chat-data',
 						JSON.stringify({

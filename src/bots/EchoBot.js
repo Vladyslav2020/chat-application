@@ -9,7 +9,7 @@ const EchoBot = new ChatBot({
 	status: 'online',
 });
 
-EchoBot.onMessage = function(socket, message) {
+EchoBot.onMessage = function (socket, message) {
 	socket.emit('get-last-seen', {
 		name: this.name,
 		time: new Date().toISOString(),

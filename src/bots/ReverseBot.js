@@ -8,7 +8,7 @@ const ReverseBot = new ChatBot({
 	status: 'online',
 });
 
-ReverseBot.onMessage = function(socket, message) {
+ReverseBot.onMessage = function (socket, message) {
 	socket.emit('get-last-seen', {
 		name: this.name,
 		time: new Date().toISOString(),

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint:fix": "prettier --write \"{src,client}/**/*.js\" t.js",
+    "lint:fix": "prettier --write \"{src,client}/**/*.js\" index.js",
     "start-client": "npm run start --prefix client",
     "start-server": "nodemon index"
   },
@@ -15,12 +15,14 @@
   "dependencies": {
     "dotenv": "^8.2.0",
     "socket.io": "^4.0.1",
-    "socket.io-client": "^4.0.1"
+    "socket.io-client": "^4.0.1",
+    "install-all": "npm install && npm install --prefix client"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
-    "eslint-plugin-prettier": "^2.6.2",
+    "eslint": "^7.24.0",
+    "eslint-plugin-prettier": "^3.4.0",
     "nodemon": "^2.0.7",
-    "prettier": "^1.13.7"
+    "prettier": "^2.2.1"
   }
 }

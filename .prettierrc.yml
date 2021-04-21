@@ -1,6 +1,6 @@
 # .prettierrc
-printWidth: 150
-parser: babylon
+printWidth: 85
+parser: babel
 trailingComma: all
 useTabs: true
 tabWidth: 2
