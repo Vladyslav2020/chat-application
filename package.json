@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint:fix": "prettier --write \"{src,client}/**/*.js\" index.js",
     "start-client": "npm run start --prefix client",
-    "start-server": "nodemon index"
+    "start-server": "nodemon index",
+    "install-all": "npm install && npm install --prefix client"
   },
   "keywords": [],
   "author": "",
@@ -15,8 +16,7 @@
   "dependencies": {
     "dotenv": "^8.2.0",
     "socket.io": "^4.0.1",
-    "socket.io-client": "^4.0.1",
-    "install-all": "npm install && npm install --prefix client"
+    "socket.io-client": "^4.0.1"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
